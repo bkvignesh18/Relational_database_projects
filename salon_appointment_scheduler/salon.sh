@@ -31,8 +31,7 @@ SERVICES() {
     SERVICE_NAME=$($PSQL "SELECT name FROM services WHERE service_id = $SERVICE_ID_SELECTED")
     CUSTOMER 
   else
-    echo -e "\nI could not find that service. What would you like today?\n"
-    SERVICES 
+    SERVICES "I could not find that service. What would you like today?\n" 
   fi
 }
 
@@ -55,11 +54,11 @@ CUSTOMER() {
 }
     
 FIX_APPOINTMENT() {
-  echo -e "\nWhat time would you like your $SERVICE_NAME, $CUSTOMER_NAME?"
+  echo -e "\nWhat time would you like your$SERVICE_NAME,$CUSTOMER_NAME?"
   read SERVICE_TIME
   
   INSERT_APPOINTMENT=$($PSQL "INSERT INTO appointments(time, customer_id, service_id) VALUES('$SERVICE_TIME', $CUSTOMER_ID, $SERVICE_ID_SELECTED)")
-  echo -e "\nI have put you down for a $SERVICE_NAME at $SERVICE_TIME, $CUSTOMER_NAME.\n"
+  echo -e "\nI have put you down for a $SERVICE_NAME at$SERVICE_TIME,$CUSTOMER_NAME.\n"
 
 }
 
